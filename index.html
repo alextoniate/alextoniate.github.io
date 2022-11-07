@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
+    <!-- Bootstrap and Bootstrap.js (for ScrollSpy) -->
+
+
+    <!-- Load jQuery, DataTables and Sheetrock -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://unpkg.com/sheetrock@1.2.0/dist/sheetrock.min.js"></script>
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/plug-ins/1.12.1/features/deepLink/dataTables.deepLink.min.js"></script>
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+
+    <!-- Load DataTables script and stylesheet -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" >
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
+
+
+        <script class="example-render" data-language="javascript">
+            // Define spreadsheet URL.
+            var mySpreadsheet = 'https://docs.google.com/spreadsheets/d/1L4hC5GbsyVcyw00kvr_98112tRQYDyf3ks7z3L1oDEI/edit#gid=0';
+          </script>
+
+
+
+    <title>Sheetrock</title>
+
+  </head>
+
+
+<body>
+
+
+         <table id="raw-table" class="display" style="width:100%"></table>
+
+
+
+		<script type="text/javascript">
+              // Load all hitters and format with DataTables.
+              
+			  
+	var searchOptions = $.fn.dataTable.ext.deepLink( ['search.search' ] );
+	
+	var language = {
+		"language": {
+            url: 'https://cdn.datatables.net/plug-ins/1.12.1/i18n/pt-BR.json'
+			}
+			};
+			
+    var defaultOptions = {
+         "pageLength": 20,
+          "pagingType": "full",
+           lengthMenu: [20,50,100]
+       };
+	   
+	 var printTable = {
+		dom: 'Blfrtip',
+        buttons: [
+        {
+            extend: 'print',
+			title: 'teste',
+        }
+    ]
+		};
+			  
+			  
+			  $('#raw-table').sheetrock({
+                url: mySpreadsheet,
+                query: "select A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W",
+              }).on('sheetrock:loaded', 
+			  
+			  function () {
+				
+		var dataTable = $('#raw-table').DataTable($.extend( defaultOptions, searchOptions, language, printTable ));
+			  
+			  });
+            </script> 
+
+
+  </body>
+
+</html>
